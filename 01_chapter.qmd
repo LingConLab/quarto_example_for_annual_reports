@@ -1,26 +1,33 @@
 ---
 format: 
   docx:
-    prefer-html: true
+    df-print: kable
+    number-sections: true
 bibliography: bibliography.bib
 editor: source
+execute: 
+  echo: false
+  warning: false
+crossref: 
+  title-delim: "\u202F–"
+  fig-title: "Рисунок"
+  tbl-title: "Таблица"
 ---
 
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 library(tidyverse)
 library(lingglosses)
 options("lingglosses.italic_transliteration" = FALSE)
 # convert bibliography from .tsv to .bib
 library(bib2df)
-read_tsv("bibliography.tsv") %>% 
+read_tsv("bibliography.tsv") |>  
   df2bib(file = "bibliography.bib")
 ```
 
 Вам нужно установить пакеты `tidyverse`, `bib2df`, `lingglosses`.
 
-# Пример главы
+# Заголовок главы
 
 В нашей главе вот так сделать **жирное**, вот так вот *курсив*. Рисунки следует складывать в папку `images` Если у Вас в тексте есть рисунок/график на него нужно сослаться, см. @fig-example, (см. на параметр `label` в следующем чанке)[^comment].
 
@@ -41,8 +48,7 @@ knitr::include_graphics("images/example.png")
 #| label: tbl-example1
 #| tbl-cap: "Моя таблица"
 
-read_csv("data/table_example.csv") |> 
-  knitr::kable()
+read_csv("data/table_example.csv")
 ```
 
 Другой способ вставлять таблицы --- использовать маркдаун таблицы (их можно копи-пейстом генерить [на этом сайте](https://www.tablesgenerator.com/markdown_tables)), см. @tbl-example2:
@@ -74,6 +80,6 @@ gloss_example("bur-e-ri c'in-ne-s:u",
 make_gloss_list()
 ```
 
-Если в списке что-то синее -- значит, нужно узнать, что автор имел в виду и сообщить об этом в личном сообщении или в тексте.
+Если в списке что-то синее --- значит, нужно узнать, что автор имел в виду и сообщить об этом в личном сообщении или в тексте.
 
-# Список литературы
+## Список литературы
